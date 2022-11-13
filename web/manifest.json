@@ -1,6 +1,6 @@
 {
-    "name": "book_bank",
-    "short_name": "book_bank",
+    "name": "login_ui",
+    "short_name": "login_ui",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
