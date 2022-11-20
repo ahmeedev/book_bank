@@ -1,5 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.login_ui">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
    <application
         android:label="login_ui"
         android:name="${applicationName}"
