@@ -1,41 +1,24 @@
 import 'package:flutter/material.dart';
 
-import 'login_screen.dart';
+import 'package:get/get.dart';
+import 'package:login_ui/app/theme/colors.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+import 'app/routes/app_pages.dart';
 
-ColorScheme defaultColorScheme = const ColorScheme(
-  primary: Color(0xffBB86FC),
-  secondary: Color(0xff03DAC6),
-  surface: Color(0xff181818),
-  background: Color(0xff121212),
-  error: Color(0xffCF6679),
-  onPrimary: Color(0xff000000),
-  onSecondary: Color(0xff000000),
-  onSurface: Color(0xffffffff),
-  onBackground: Color(0xffffffff),
-  onError: Color(0xff000000),
-  brightness: Brightness.dark,
-);
+Future<void> main() async {
+  await basicInitailization();
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+  runApp(
+    GetMaterialApp(
+      title: "Book Bank",
       theme: ThemeData(
         colorScheme: defaultColorScheme,
-        primarySwatch: Colors.blue,
+        // primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(title: 'Login UI'),
-    );
-  }
+      initialRoute: AppPages.INITIAL,
+      getPages: AppPages.routes,
+    ),
+  );
 }
 
-//
-//
+Future<void> basicInitailization() async {}

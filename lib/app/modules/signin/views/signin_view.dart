@@ -1,18 +1,12 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:login_ui/login_screen.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key, required this.title}) : super(key: key);
-  final String title;
+import 'package:get/get.dart';
 
-  @override
-  State<RegisterPage> createState() => _RegisterPageState();
-}
+import '../controllers/signin_controller.dart';
 
-class _RegisterPageState extends State<RegisterPage> {
-  final _formKey = GlobalKey<FormState>();
-  var rememberValue = false;
+class SigninView extends GetView<SigninController> {
+  const SigninView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +19,7 @@ class _RegisterPageState extends State<RegisterPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'Sign up',
+              'Sign in',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 40,
@@ -35,49 +29,9 @@ class _RegisterPageState extends State<RegisterPage> {
               height: 60,
             ),
             Form(
-              key: _formKey,
+              key: controller.formKey,
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          validator: (value) => EmailValidator.validate(value!)
-                              ? null
-                              : "Please enter a valid email",
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            hintText: 'First name',
-                            prefixIcon: const Icon(Icons.person),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Expanded(
-                        child: TextFormField(
-                          validator: (value) => EmailValidator.validate(value!)
-                              ? null
-                              : "Please enter a valid email",
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                            hintText: 'Last name',
-                            prefixIcon: const Icon(Icons.person),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
                   TextFormField(
                     validator: (value) => EmailValidator.validate(value!)
                         ? null
@@ -111,18 +65,30 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                   ),
+                  Obx(() => CheckboxListTile(
+                        title: const Text("Remember me"),
+                        contentPadding: EdgeInsets.zero,
+                        value: controller.rememberValue.value,
+                        activeColor: Theme.of(context).colorScheme.primary,
+                        onChanged: (newValue) {
+                          // setState(() {
+                          //   rememberValue = newValue!;
+                          // });
+                        },
+                        controlAffinity: ListTileControlAffinity.leading,
+                      )),
                   const SizedBox(
                     height: 20,
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {}
+                      if (controller.formKey.currentState!.validate()) {}
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),
                     ),
                     child: const Text(
-                      'Sign up',
+                      'Sign in',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -134,18 +100,18 @@ class _RegisterPageState extends State<RegisterPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Already registered?'),
+                      const Text('Not registered yet?'),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const LoginPage(title: 'Login UI'),
-                            ),
-                          );
+                          // Navigator.pushReplacement(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) =>
+                          //         const RegisterPage(title: 'Register UI'),
+                          //   ),
+                          // );
                         },
-                        child: const Text('Sign in'),
+                        child: const Text('Create an account'),
                       ),
                     ],
                   ),
