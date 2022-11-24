@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:login_ui/app/theme/colors.dart';
+import 'package:book_bank/app/theme/colors.dart';
 
 import 'app/routes/app_pages.dart';
 

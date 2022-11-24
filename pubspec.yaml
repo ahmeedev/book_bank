@@ -1,7 +1,7 @@
-name: login_ui
+name: book_bank
 version: 1.0.0+1
 publish_to: none
-description: Login UI
+description: Book Bank
 environment: 
   sdk: '>=2.15.1 <3.0.0'
 
