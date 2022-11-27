@@ -1,4 +1,4 @@
-package com.rise4solution.book_bank
+package com.example.book_bank
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "839273008702",
+    "project_id": "book-bank-8af3f",
+    "storage_bucket": "book-bank-8af3f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839273008702:android:7cf53cf1c7b0adac568b6f",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "839273008702-1gdpfb9rbp9jse4ft61mbs1tlo6lp02n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4_Yx3ON7KEPSTpoiM_Wd1Cs2jEDrOkbM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "839273008702-1gdpfb9rbp9jse4ft61mbs1tlo6lp02n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

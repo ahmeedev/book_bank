@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:book_bank/app/theme/colors.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import 'app/routes/app_pages.dart';
 
@@ -10,6 +11,7 @@ Future<void> main() async {
 
   runApp(
     GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "Book Bank",
       theme: ThemeData(
         colorScheme: defaultColorScheme,

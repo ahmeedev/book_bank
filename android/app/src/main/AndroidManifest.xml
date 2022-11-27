@@ -1,6 +1,7 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.book_bank">
    <application
-        android:label="login_ui"
+        android:label="book_bank"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

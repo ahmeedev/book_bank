@@ -1,8 +1,13 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: prefer_const_constructors
+
 import 'package:get/get.dart';
 
-class SignupController extends GetxController {
-  //TODO: Implement SignupController
+import '../../cart/views/cart_view.dart';
+import '../../home/views/home_view.dart';
+import '../../profile/views/profile_view.dart';
+
+class ViewController extends GetxController {
+  //TODO: Implement ViewController
 
   final count = 0.obs;
   @override
@@ -21,6 +26,4 @@ class SignupController extends GetxController {
   }
 
   void increment() => count.value++;
-  final formKey = GlobalKey<FormState>();
-  var rememberValue = false.obs;
 }

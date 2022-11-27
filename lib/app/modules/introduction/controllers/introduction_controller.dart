@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SignupController extends GetxController {
-  //TODO: Implement SignupController
+class IntroductionController extends GetxController {
+  //TODO: Implement IntroductionController
 
   final count = 0.obs;
   @override
@@ -21,6 +20,4 @@ class SignupController extends GetxController {
   }
 
   void increment() => count.value++;
-  final formKey = GlobalKey<FormState>();
-  var rememberValue = false.obs;
 }

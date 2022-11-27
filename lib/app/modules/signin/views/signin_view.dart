@@ -1,3 +1,4 @@
+import 'package:book_bank/app/routes/app_pages.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
@@ -103,13 +104,7 @@ class SigninView extends GetView<SigninController> {
                       const Text('Not registered yet?'),
                       TextButton(
                         onPressed: () {
-                          // Navigator.pushReplacement(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) =>
-                          //         const RegisterPage(title: 'Register UI'),
-                          //   ),
-                          // );
+                          Get.toNamed(Routes.SIGNUP);
                         },
                         child: const Text('Create an account'),
                       ),
