@@ -2,10 +2,10 @@ import 'package:get/get.dart';
 
 import '../modules/cart/bindings/cart_binding.dart';
 import '../modules/cart/views/cart_view.dart';
+import '../modules/detail/bindings/detail_binding.dart';
+import '../modules/detail/views/detail_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/introduction/bindings/introduction_binding.dart';
-import '../modules/introduction/views/introduction_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/signin/bindings/signin_binding.dart';
@@ -22,7 +22,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.INTRODUCTION;
+  static const INITIAL = Routes.VIEW;
 
   static final routes = [
     GetPage(
@@ -56,9 +56,9 @@ class AppPages {
       binding: ViewBinding(),
     ),
     GetPage(
-      name: _Paths.INTRODUCTION,
-      page: () => const IntroductionView(),
-      binding: IntroductionBinding(),
+      name: _Paths.DETAIL,
+      page: () => const DetailView(),
+      binding: DetailBinding(),
     ),
   ];
 }
