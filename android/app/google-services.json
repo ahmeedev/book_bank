@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:839273008702:android:7cf53cf1c7b0adac568b6f",
+        "mobilesdk_app_id": "1:839273008702:android:a4724d01df0a1ae6568b6f",
         "android_client_info": {
-          "package_name": "com.android.application"
+          "package_name": "com.example.book_bank"
         }
       },
       "oauth_client": [
