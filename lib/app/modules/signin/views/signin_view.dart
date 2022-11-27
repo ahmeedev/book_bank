@@ -38,6 +38,7 @@ class SigninView extends GetView<SigninController> {
                         ? null
                         : "Please enter a valid email",
                     maxLines: 1,
+                    controller: controller.emailController,
                     decoration: InputDecoration(
                       hintText: 'Enter your email',
                       prefixIcon: const Icon(Icons.email),
@@ -57,6 +58,7 @@ class SigninView extends GetView<SigninController> {
                       return null;
                     },
                     maxLines: 1,
+                    controller: controller.passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.lock),
@@ -83,7 +85,11 @@ class SigninView extends GetView<SigninController> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      if (controller.formKey.currentState!.validate()) {}
+                      if (controller.formKey.currentState!.validate()) {
+                        controller.login(controller.emailController.text,
+                            controller.passwordController.text);
+                        Get.toNamed(Routes.VIEW);
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),

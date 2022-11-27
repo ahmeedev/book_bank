@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 import '../modules/cart/bindings/cart_binding.dart';
@@ -20,9 +21,20 @@ import '../modules/view/views/view_view.dart';
 part 'app_routes.dart';
 
 class AppPages {
+  _setInitialView(User? user) async {
+    if (user == null) {
+      await Future.delayed(const Duration(seconds: 5));
+
+      Get.toNamed(Routes.SIGNIN);
+    } else {
+      await Future.delayed(const Duration(seconds: 5));
+      Get.toNamed(Routes.VIEW);
+    }
+  }
+
   AppPages._();
 
-  static const INITIAL = Routes.VIEW;
+  static const INITIAL = Routes.SIGNIN;
 
   static final routes = [
     GetPage(

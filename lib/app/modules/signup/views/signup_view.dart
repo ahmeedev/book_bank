@@ -34,10 +34,8 @@ class SignupView extends GetView<SignupController> {
                     children: [
                       Expanded(
                         child: TextFormField(
-                          validator: (value) => EmailValidator.validate(value!)
-                              ? null
-                              : "Please enter a valid email",
                           maxLines: 1,
+                          controller: controller.firstnameController,
                           decoration: InputDecoration(
                             hintText: 'First name',
                             prefixIcon: const Icon(Icons.person),
@@ -52,10 +50,8 @@ class SignupView extends GetView<SignupController> {
                       ),
                       Expanded(
                         child: TextFormField(
-                          validator: (value) => EmailValidator.validate(value!)
-                              ? null
-                              : "Please enter a valid email",
                           maxLines: 1,
+                          controller: controller.lastnameController,
                           decoration: InputDecoration(
                             hintText: 'Last name',
                             prefixIcon: const Icon(Icons.person),
@@ -75,6 +71,7 @@ class SignupView extends GetView<SignupController> {
                         ? null
                         : "Please enter a valid email",
                     maxLines: 1,
+                    controller: controller.emailController,
                     decoration: InputDecoration(
                       hintText: 'Enter your email',
                       prefixIcon: const Icon(Icons.email),
@@ -94,6 +91,7 @@ class SignupView extends GetView<SignupController> {
                       return null;
                     },
                     maxLines: 1,
+                    controller: controller.passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.lock),
@@ -108,7 +106,13 @@ class SignupView extends GetView<SignupController> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      if (controller.formKey.currentState!.validate()) {}
+                      if (controller.formKey.currentState!.validate()) {
+                        controller.SignUp(
+                          controller.firstnameController.text,
+                          controller.emailController.text,
+                          controller.passwordController.text,
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),
