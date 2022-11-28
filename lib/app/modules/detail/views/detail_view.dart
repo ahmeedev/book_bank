@@ -1,8 +1,9 @@
-import 'package:book_bank/app/theme/app_constants.dart';
+import 'package:book_bank/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../theme/app_constants.dart';
 import '../controllers/detail_controller.dart';
 
 class DetailView extends GetView<DetailController> {
@@ -22,7 +23,7 @@ class DetailView extends GetView<DetailController> {
             image: const DecorationImage(
               fit: BoxFit.cover,
               image: NetworkImage(
-                  "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSl-HrIAbD8078z57m1vMbvw1AQ8SKaKf5v5TObkDEh64g7nu80"),
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShnwU836xth7rKVC1ogwmHXst4prHaoj1mvAMdTT-Zd1u0OfMtngpmDT19LZ0RDNjcPzE&usqp=CAU"),
             ),
           ),
         ),
@@ -122,18 +123,20 @@ class DetailView extends GetView<DetailController> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xff8599FF),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(Routes.PDF);
+                    },
                     child: Row(
                       children: const [
                         Icon(
-                          Icons.sell,
+                          Icons.read_more,
                           color: Colors.white,
                         ),
                         SizedBox(
                           width: 15,
                         ),
                         Text(
-                          "Buy Book",
+                          "Read Book",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,

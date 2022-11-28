@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:book_bank/app/theme/colors.dart';
 
 import 'app/routes/app_pages.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'app/theme/colors.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp().then((value) {});
+  await Firebase.initializeApp();
 
   await basicInitailization();
 

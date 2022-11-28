@@ -26,7 +26,7 @@ class Book extends StatelessWidget {
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(
-                      "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSl-HrIAbD8078z57m1vMbvw1AQ8SKaKf5v5TObkDEh64g7nu80"),
+                      "https://www.booksfree.org/wp-content/uploads/2022/03/Resisting-Happiness-by-Mathew-Kelly-pdf-free-download.png"),
                 ),
               ),
             ),

@@ -10,6 +10,7 @@ abstract class Routes {
   static const PROFILE = _Paths.PROFILE;
   static const VIEW = _Paths.VIEW;
   static const DETAIL = _Paths.DETAIL;
+  static const PDF = _Paths.PDF;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const PROFILE = '/profile';
   static const VIEW = '/view';
   static const DETAIL = '/detail';
+  static const PDF = '/pdf';
 }
