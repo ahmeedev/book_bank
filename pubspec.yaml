@@ -16,7 +16,7 @@ dependencies:
   cloud_firestore: ^4.1.0
   advance_pdf_viewer: ^2.0.1
   syncfusion_flutter_pdfviewer: ^20.3.58
-
+  velocity_x: ^3.6.0
 
 
 dev_dependencies: 
