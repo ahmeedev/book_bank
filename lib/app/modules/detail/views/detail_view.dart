@@ -1,4 +1,3 @@
-import 'package:book_bank/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -10,147 +9,82 @@ class DetailView extends GetView<DetailController> {
   const DetailView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
+        appBar: AppBar(title: const Text("Book Details")),
         body: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: const EdgeInsets.all(kMargin),
-          height: 300,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            image: const DecorationImage(
-              fit: BoxFit.cover,
-              image: NetworkImage(
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShnwU836xth7rKVC1ogwmHXst4prHaoj1mvAMdTT-Zd1u0OfMtngpmDT19LZ0RDNjcPzE&usqp=CAU"),
-            ),
-          ),
-        ),
-        const SizedBox(height: 10),
-        const Padding(
-          padding: EdgeInsets.only(left: kPadding),
-          child: Text(
-            "Displacement",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        const SizedBox(height: 5),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kPadding),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text("Kiku Huges"),
-              Text(
-                "Rs 800",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Color(0xffEA4991),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.only(left: kPadding),
-          child: Text(
-            "\nDiscription",
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.only(left: kPadding, top: kMargin),
-          child: Text(
-            "Ini tentang Moza dan ketiga cowok yang tinggal satukompleks dengannya. Ada Eghi, cowok yang Moza sukai. Lalu Dennis, cowok yang menyukai Moza. Juga Ferrish,cowok tukang rusuh. Hidup Moza begitu penuh warnadan kesialan karena ketiganya.Jadi, di antara mereka bertiga, siapa yang dapatmembuat Moza jatuh cinta?",
-            style: TextStyle(
-              fontSize: 20,
-              letterSpacing: 2,
-            ),
-          ),
-        ),
-        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: kPadding, top: kMargin),
-              child: ClipRRect(
+            Container(
+              margin: const EdgeInsets.all(kMargin),
+              height: 300,
+              width: double.infinity,
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                child: SizedBox(
-                  height: 50,
-                  width: 170,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff8599FF),
-                    ),
-                    onPressed: () {},
-                    child: Row(
-                      children: const [
-                        Icon(
-                          Icons.shopping_cart,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          "Add to Cart",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                image: const DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(
+                      "https://cdn.dribbble.com/users/2985163/screenshots/10367208/media/5b595f284978f5a32b6abe0329ccbc04.png"),
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: kPadding, top: kMargin),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: SizedBox(
-                  height: 50,
-                  width: 170,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff8599FF),
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    kHeight,
+                    Text(
+                      "Javeria Afzal",
+                      style: theme.textTheme.titleLarge!
+                          .copyWith(color: Colors.black),
                     ),
-                    onPressed: () {
-                      Get.toNamed(Routes.PDF);
-                    },
-                    child: Row(
-                      children: const [
-                        Icon(
-                          Icons.read_more,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          width: 15,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "javiriaafzaldeme@gmail.com",
+                          style: theme.textTheme.labelMedium!
+                              .copyWith(color: Colors.black),
                         ),
                         Text(
-                          "Read Book",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
+                          "Rs 800",
+                          style: theme.textTheme.titleLarge!
+                              .copyWith(color: theme.colorScheme.primary),
                         ),
                       ],
                     ),
-                  ),
-                ),
+                    kHeight,
+                    Text(
+                      "Description",
+                      style: theme.textTheme.titleLarge!.copyWith(
+                          color: Colors.black, fontWeight: FontWeight.w900),
+                    ),
+                    kHeight,
+                    Text(
+                      "javiriaafzaldeme@gmail.com" * 100,
+                      style: theme.textTheme.labelMedium!
+                          .copyWith(color: Colors.black),
+                    ),
+                  ],
+                ).paddingSymmetric(horizontal: kPadding),
               ),
             ),
+            Row(
+              children: [
+                Expanded(
+                    child: ElevatedButton(
+                        onPressed: () {},
+                        child: const Text("Add to cart").paddingAll(kPadding))),
+                kWidth,
+                Expanded(
+                    child: ElevatedButton(
+                        onPressed: () {},
+                        child: const Text("Buy Now").paddingAll(kPadding))),
+              ],
+            ).paddingSymmetric(horizontal: kPadding, vertical: kPadding / 2),
           ],
-        )
-      ],
-    ));
+        ));
   }
 }

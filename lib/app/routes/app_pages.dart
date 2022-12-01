@@ -36,7 +36,7 @@ class AppPages {
 
   AppPages._();
 
-  static const INITIAL = Routes.VIEW;
+  static const INITIAL = Routes.HOME;
 
   static final routes = [
     GetPage(
