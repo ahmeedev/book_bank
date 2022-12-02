@@ -19,7 +19,10 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // impornt initialization
+  // make state persistent for user authentication.
+  // FirebaseAuth.instance.setPersistence(Persistence.LOCAL);
+
+  // important initialization
   await basicInitailization();
 
   //

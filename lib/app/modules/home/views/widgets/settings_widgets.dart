@@ -1,6 +1,7 @@
 import 'package:book_bank/app/modules/home/controllers/settings_controller.dart';
 import 'package:book_bank/app/routes/app_pages.dart';
 import 'package:book_bank/app/theme/app_constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,8 +16,7 @@ class ProfileWidget extends StatelessWidget {
     return Row(
       // crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        FittedBox(
-            fit: BoxFit.fill, child: Image.asset('assets/images/profile.jpeg')),
+        Image.asset('assets/images/profile.jpeg'),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(kPadding).copyWith(top: 0),
@@ -82,8 +82,23 @@ class SettingsTiles extends GetView<SettingsController> {
             child: ListView(
               physics: const BouncingScrollPhysics(),
               children: [
-                _buildTile(theme,
-                    name: "Your Books", icon: Icons.book, onTap: () {}),
+                _buildTile(theme, name: "Your Books", icon: Icons.book,
+                    onTap: () async {
+                  print(FirebaseAuth.instance.currentUser!.uid);
+                  final db = FirebaseFirestore.instance;
+                  // await db.collection('books').add({"Key": 1234});
+                  // final result = await db.collection("books").doc().set({
+                  //   "AlChemist": {
+                  //     "price": 950,
+                  //     "writer": "Arthur Morgan",
+                  //     "description": "This book tells you" * 10,
+                  //     "image":
+                  //         "https://images-na.ssl-images-amazon.com/images/I/51Zy9ZQZQlL._SX331_BO1,204,203,200_.jpg",
+                  //   }
+                  // }).then((value) => logger.i("Book Added Successfully"),
+                  //     onError: (error) =>
+                  //         logger.e("Error adding book: $error"));
+                }),
                 _buildTile(theme,
                     name: "Your History", icon: Icons.history, onTap: () {}),
                 controller.isSingIn.value
@@ -96,6 +111,23 @@ class SettingsTiles extends GetView<SettingsController> {
                         onTap: () {
                         Get.toNamed(Routes.SIGNIN);
                       }),
+                ElevatedButton(
+                    onPressed: () async {
+                      print(FirebaseAuth.instance.currentUser!.uid);
+                      final db = FirebaseFirestore.instance;
+                      // Create a new user with a first and last name
+                      final user = <String, dynamic>{
+                        "first": "Ada",
+                        "last": "Lovelace",
+                        "born": 1815
+                      };
+
+// Add a new document with a generated ID
+                      db.collection("users").add(user).then((DocumentReference
+                              doc) =>
+                          print('DocumentSnapshot added with ID: ${doc.id}'));
+                    },
+                    child: const Text("teting"))
               ],
             ),
           )),
