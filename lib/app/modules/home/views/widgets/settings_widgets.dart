@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../../../../main.dart';
+
 class ProfileWidget extends StatelessWidget {
   const ProfileWidget({Key? key}) : super(key: key);
 
@@ -86,18 +88,18 @@ class SettingsTiles extends GetView<SettingsController> {
                     onTap: () async {
                   print(FirebaseAuth.instance.currentUser!.uid);
                   final db = FirebaseFirestore.instance;
-                  // await db.collection('books').add({"Key": 1234});
-                  // final result = await db.collection("books").doc().set({
-                  //   "AlChemist": {
-                  //     "price": 950,
-                  //     "writer": "Arthur Morgan",
-                  //     "description": "This book tells you" * 10,
-                  //     "image":
-                  //         "https://images-na.ssl-images-amazon.com/images/I/51Zy9ZQZQlL._SX331_BO1,204,203,200_.jpg",
-                  //   }
-                  // }).then((value) => logger.i("Book Added Successfully"),
-                  //     onError: (error) =>
-                  //         logger.e("Error adding book: $error"));
+                  await db.collection('books').add({"Key": 1234});
+                  final result = await db.collection("books").doc().set({
+                    "AlChemist": {
+                      "price": 950,
+                      "writer": "Arthur Morgan",
+                      "description": "This book tells you" * 10,
+                      "image":
+                          "https://images-na.ssl-images-amazon.com/images/I/51Zy9ZQZQlL._SX331_BO1,204,203,200_.jpg",
+                    }
+                  }).then((value) => logger.i("Book Added Successfully"),
+                      onError: (error) =>
+                          logger.e("Error adding book: $error"));
                 }),
                 _buildTile(theme,
                     name: "Your History", icon: Icons.history, onTap: () {}),
@@ -113,19 +115,17 @@ class SettingsTiles extends GetView<SettingsController> {
                       }),
                 ElevatedButton(
                     onPressed: () async {
-                      print(FirebaseAuth.instance.currentUser!.uid);
+                      // print(FirebaseAuth.instance.currentUser!.uid);
                       final db = FirebaseFirestore.instance;
-                      // Create a new user with a first and last name
-                      final user = <String, dynamic>{
-                        "first": "Ada",
-                        "last": "Lovelace",
-                        "born": 1815
-                      };
-
-// Add a new document with a generated ID
-                      db.collection("users").add(user).then((DocumentReference
-                              doc) =>
-                          print('DocumentSnapshot added with ID: ${doc.id}'));
+                      final docRef =
+                          db.collection("book").doc("JadEPHcUjFogDbHeuBms");
+                      docRef.get().then(
+                        (DocumentSnapshot doc) {
+                          final data = doc.data();
+                          print(data);
+                        },
+                        onError: (e) => print("Error getting document: $e"),
+                      );
                     },
                     child: const Text("teting"))
               ],
