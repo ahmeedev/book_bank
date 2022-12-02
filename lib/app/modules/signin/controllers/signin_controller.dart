@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,15 +10,19 @@ class SigninController extends GetxController {
   final formKey = GlobalKey<FormState>();
   var rememberValue = false.obs;
   void login(String email, String password) async {
-    try {
-      if (email.isNotEmpty && password.isNotEmpty) {
-        await FirebaseAuth.instance
-            .signInWithEmailAndPassword(email: email, password: password);
-      } else {
-        Get.snackbar("Error Logging In", "Please enter all the fields");
-      }
-    } catch (e) {
-      Get.snackbar("Error Logging In", e.toString());
-    }
+    final result = await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: "jia@gmail.com", password: "jia123");
+    log("Result is $result", name: "SIGNIN");
+    Get.back();
+    //   try {
+    //     if (email.isNotEmpty && password.isNotEmpty) {
+    //       await FirebaseAuth.instance
+    //           .signInWithEmailAndPassword(email: email, password: password);
+    //     } else {
+    //       Get.snackbar("Error Logging In", "Please enter all the fields");
+    //     }
+    //   } catch (e) {
+    //     Get.snackbar("Error Logging In", e.toString());
+    //   }
   }
 }

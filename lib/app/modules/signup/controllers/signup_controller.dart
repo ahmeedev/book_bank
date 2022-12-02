@@ -1,9 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../model/user.dart';
 
 class SignupController extends GetxController {
   //TODO: Implement SignupController
@@ -22,22 +19,26 @@ class SignupController extends GetxController {
     String email,
     String password,
   ) async {
-    try {
-      if (username.isNotEmpty && email.isNotEmpty && password.isNotEmpty) {
-        UserCredential credential = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(email: email, password: password);
+    UserCredential credential = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(
+            email: "jia@gmail.com", password: "jia123");
 
-        myUser user =
-            myUser(name: username, email: email, uid: credential.user!.uid);
+    // try {
+    //   if (username.isNotEmpty && email.isNotEmpty && password.isNotEmpty) {
+    //     // UserCredential credential = await FirebaseAuth.instance
+    //     //     .createUserWithEmailAndPassword(email: email, password: password);
 
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(credential.user!.uid)
-            .set(user.toJson());
-      }
-    } catch (e) {
-      print(e);
-      Get.snackbar("Error Occurred", e.toString());
-    }
+    //     // myUser user =
+    //     //     myUser(name: username, email: email, uid: credential.user!.uid);
+
+    //     // await FirebaseFirestore.instance
+    //     //     .collection('users')
+    //     //     .doc(credential.user!.uid)
+    //     //     .set(user.toJson());
+    //   }
+    // } catch (e) {
+    //   print(e);
+    //   Get.snackbar("Error Occurred", e.toString());
+    // }
   }
 }

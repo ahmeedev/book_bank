@@ -6,6 +6,7 @@ getLightTheme() {
   final base = ThemeData.light().copyWith(
       colorScheme: defaultColorScheme,
       scaffoldBackgroundColor: defaultColorScheme.background,
+      appBarTheme: const AppBarTheme(centerTitle: true),
       cardTheme: const CardTheme(
         elevation: 12.0,
       ),

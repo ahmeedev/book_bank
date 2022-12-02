@@ -1,4 +1,5 @@
 import 'package:book_bank/app/routes/app_pages.dart';
+import 'package:book_bank/app/theme/app_constants.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
@@ -11,24 +12,27 @@ class SigninView extends GetView<SigninController> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(
+        title: const Text(
+          'Authentication',
+        ),
+      ),
       body: Container(
         padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'Sign in',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 40,
-              ),
-            ),
-            const SizedBox(
-              height: 60,
-            ),
+            Text('SIGN IN',
+                style: theme.textTheme.displaySmall!.copyWith(
+                    color: theme.colorScheme.primary,
+                    fontSize: theme.textTheme.displaySmall!.fontSize! - 8,
+                    fontWeight: FontWeight.w900)),
+            kHeight,
+            kHeight,
             Form(
               key: controller.formKey,
               child: Column(
@@ -69,7 +73,7 @@ class SigninView extends GetView<SigninController> {
                     ),
                   ),
                   Obx(() => CheckboxListTile(
-                        title: const Text("Remember me"),
+                        title: const Text("I'm not Robot"),
                         contentPadding: EdgeInsets.zero,
                         value: controller.rememberValue.value,
                         activeColor: Theme.of(context).colorScheme.primary,
@@ -85,11 +89,12 @@ class SigninView extends GetView<SigninController> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      if (controller.formKey.currentState!.validate()) {
-                        controller.login(controller.emailController.text,
-                            controller.passwordController.text);
-                        Get.toNamed(Routes.VIEW);
-                      }
+                      controller.login(controller.emailController.text,
+                          controller.passwordController.text);
+                      // if (controller.formKey.currentState!.validate()) {
+                      //   controller.login(controller.emailController.text,
+                      //       controller.passwordController.text);
+                      // }
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),
@@ -110,7 +115,7 @@ class SigninView extends GetView<SigninController> {
                       const Text('Not registered yet?'),
                       TextButton(
                         onPressed: () {
-                          Get.toNamed(Routes.SIGNUP);
+                          Get.offAndToNamed(Routes.SIGNUP);
                         },
                         child: const Text('Create an account'),
                       ),

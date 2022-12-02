@@ -3,29 +3,33 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../theme/app_constants.dart';
 import '../controllers/signup_controller.dart';
 
 class SignupView extends GetView<SignupController> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(
+        title: const Text(
+          'Authentication',
+        ),
+      ),
       body: Container(
         padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'Sign up',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 40,
-              ),
-            ),
-            const SizedBox(
-              height: 60,
-            ),
+            Text('SIGN UP',
+                style: theme.textTheme.displaySmall!.copyWith(
+                    color: theme.colorScheme.primary,
+                    fontSize: theme.textTheme.displaySmall!.fontSize! - 8,
+                    fontWeight: FontWeight.w900)),
+            kHeight,
+            kHeight,
             Form(
               key: controller.formKey,
               child: Column(
@@ -106,13 +110,18 @@ class SignupView extends GetView<SignupController> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      if (controller.formKey.currentState!.validate()) {
-                        controller.SignUp(
-                          controller.firstnameController.text,
-                          controller.emailController.text,
-                          controller.passwordController.text,
-                        );
-                      }
+                      controller.SignUp(
+                        controller.firstnameController.text,
+                        controller.emailController.text,
+                        controller.passwordController.text,
+                      );
+                      // if (controller.formKey.currentState!.validate()) {
+                      //   controller.SignUp(
+                      //     controller.firstnameController.text,
+                      //     controller.emailController.text,
+                      //     controller.passwordController.text,
+                      //   );
+                      // }
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),
@@ -133,7 +142,7 @@ class SignupView extends GetView<SignupController> {
                       const Text('Already registered?'),
                       TextButton(
                         onPressed: () {
-                          Get.toNamed(Routes.SIGNIN);
+                          Get.offAndToNamed(Routes.SIGNIN);
                         },
                         child: const Text('Sign in'),
                       ),

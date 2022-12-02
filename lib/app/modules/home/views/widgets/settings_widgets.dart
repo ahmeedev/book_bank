@@ -1,5 +1,9 @@
+import 'package:book_bank/app/modules/home/controllers/settings_controller.dart';
+import 'package:book_bank/app/routes/app_pages.dart';
 import 'package:book_bank/app/theme/app_constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ProfileWidget extends StatelessWidget {
@@ -65,28 +69,36 @@ class ProfileWidget extends StatelessWidget {
   }
 }
 
-class SettingsTiles extends StatelessWidget {
+class SettingsTiles extends GetView<SettingsController> {
   const SettingsTiles({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Expanded(
-      child: Container(
-        // padding: const EdgeInsets.symmetric(vertical: kPadding),
-        color: theme.colorScheme.background,
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
-          children: [
-            _buildTile(theme,
-                name: "Your Books", icon: Icons.book, onTap: () {}),
-            _buildTile(theme,
-                name: "Your History", icon: Icons.history, onTap: () {}),
-            _buildTile(theme,
-                name: "Sign Out", icon: Icons.person, onTap: () {}),
-          ],
-        ),
-      ),
+      child: Obx(() => Container(
+            // padding: const EdgeInsets.symmetric(vertical: kPadding),
+            color: theme.colorScheme.background,
+            child: ListView(
+              physics: const BouncingScrollPhysics(),
+              children: [
+                _buildTile(theme,
+                    name: "Your Books", icon: Icons.book, onTap: () {}),
+                _buildTile(theme,
+                    name: "Your History", icon: Icons.history, onTap: () {}),
+                controller.isSingIn.value
+                    ? _buildTile(theme, name: "Sign out", icon: Icons.person,
+                        onTap: () {
+                        // Get.toNamed(Routes.SIGNIN);
+                        FirebaseAuth.instance.signOut();
+                      })
+                    : _buildTile(theme, name: "Sign in", icon: Icons.person,
+                        onTap: () {
+                        Get.toNamed(Routes.SIGNIN);
+                      }),
+              ],
+            ),
+          )),
     );
   }
 
