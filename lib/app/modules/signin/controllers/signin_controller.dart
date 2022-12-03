@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:book_bank/app/utilities/get_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,6 +15,7 @@ class SigninController extends GetxController {
         .signInWithEmailAndPassword(email: "jia@gmail.com", password: "jia123");
     log("Result is $result", name: "SIGNIN");
     Get.back();
+    showSnackBar(title: "Auth", description: "Sign in Successfully");
     //   try {
     //     if (email.isNotEmpty && password.isNotEmpty) {
     //       await FirebaseAuth.instance

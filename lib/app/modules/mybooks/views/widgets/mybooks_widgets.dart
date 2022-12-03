@@ -1,22 +1,11 @@
-import 'package:book_bank/app/theme/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class HomeViewBook extends StatelessWidget {
-  final String name;
-  final String descirption;
-  final int price;
-  final String image;
-  final String authur;
-  const HomeViewBook({
-    Key? key,
-    required this.name,
-    required this.descirption,
-    required this.price,
-    required this.image,
-    required this.authur,
-  }) : super(key: key);
+import '../../../../theme/app_constants.dart';
+
+class MyBookCard extends StatelessWidget {
+  const MyBookCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +19,7 @@ class HomeViewBook extends StatelessWidget {
           width: width * 0.5,
           child: FittedBox(
             fit: BoxFit.fill,
-            child: Image.network(image),
+            child: Image.network("https://picsum.photos/180"),
           ),
         ),
         kHeightH,
@@ -41,7 +30,7 @@ class HomeViewBook extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  name,
+                  "Al Chemist",
                   style: theme.textTheme.titleMedium!
                       .copyWith(fontWeight: FontWeight.w900),
                 ),
@@ -49,12 +38,12 @@ class HomeViewBook extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "By: $authur",
+                      "By: William James",
                       style: theme.textTheme.labelMedium!.copyWith(),
                     ).cornerRadius(kRadius / 2),
                     const Spacer(),
                     Text(
-                      "Rs. $price",
+                      "800 Rs.",
                       style: theme.textTheme.labelLarge!.copyWith(
                           fontWeight: FontWeight.w900,
                           color: theme.colorScheme.primary),
@@ -66,7 +55,8 @@ class HomeViewBook extends StatelessWidget {
                 ),
                 kHeightH,
                 Text(
-                  descirption,
+                  "This book introduce you the story of a man who finds a gold from their he lives" *
+                      2,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                 ),
@@ -75,7 +65,7 @@ class HomeViewBook extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     ElevatedButton(
-                        onPressed: () {}, child: const Text("Shop Now")),
+                        onPressed: () {}, child: const Text("Read Now")),
                   ],
                 )
               ],

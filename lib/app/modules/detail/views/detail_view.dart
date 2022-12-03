@@ -1,3 +1,4 @@
+import 'package:book_bank/app/modules/cart/controllers/cart_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -16,16 +17,14 @@ class DetailView extends GetView<DetailController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: const EdgeInsets.all(kMargin),
+              // margin: const EdgeInsets.all(kMargin),
               height: 300,
               width: double.infinity,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                image: const DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(
-                      "https://cdn.dribbble.com/users/2985163/screenshots/10367208/media/5b595f284978f5a32b6abe0329ccbc04.png"),
-                ),
+                // borderRadius: BorderRadius.circular(20),
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(controller.book.image)),
               ),
             ),
             Expanded(
@@ -36,7 +35,7 @@ class DetailView extends GetView<DetailController> {
                   children: [
                     kHeight,
                     Text(
-                      "Javeria Afzal",
+                      controller.book.name,
                       style: theme.textTheme.titleLarge!
                           .copyWith(color: Colors.black),
                     ),
@@ -44,12 +43,12 @@ class DetailView extends GetView<DetailController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "javiriaafzaldeme@gmail.com",
+                          controller.book.authur,
                           style: theme.textTheme.labelMedium!
                               .copyWith(color: Colors.black),
                         ),
                         Text(
-                          "Rs 800",
+                          "Rs. ${controller.book.price}",
                           style: theme.textTheme.titleLarge!
                               .copyWith(color: theme.colorScheme.primary),
                         ),
@@ -63,7 +62,7 @@ class DetailView extends GetView<DetailController> {
                     ),
                     kHeight,
                     Text(
-                      "javiriaafzaldeme@gmail.com" * 100,
+                      controller.book.description,
                       style: theme.textTheme.labelMedium!
                           .copyWith(color: Colors.black),
                     ),
@@ -75,7 +74,11 @@ class DetailView extends GetView<DetailController> {
               children: [
                 Expanded(
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.find<CartController>()
+                              .cartItems
+                              .add(controller.book);
+                        },
                         child: const Text("Add to cart").paddingAll(kPadding))),
                 kWidth,
                 Expanded(

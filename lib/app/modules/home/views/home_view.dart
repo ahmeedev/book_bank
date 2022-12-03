@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace
 
+import 'package:book_bank/app/modules/cart/controllers/cart_controller.dart';
+import 'package:book_bank/app/modules/home/models/book_model.dart';
 import 'package:book_bank/app/modules/home/views/widgets/home_widgets.dart';
 import 'package:book_bank/app/theme/app_constants.dart';
 import 'package:flutter/material.dart';
@@ -128,7 +130,10 @@ class HomeView extends GetView<HomeController> {
                         Container(
                           color: theme.colorScheme.onSurface,
                           child: Text(
-                            "1",
+                            Get.find<CartController>()
+                                .cartItems
+                                .length
+                                .toString(),
                             style: theme.textTheme.labelSmall!.copyWith(
                                 color: Colors.black,
                                 fontWeight: FontWeight.w900),
@@ -167,25 +172,75 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Expanded _buildGridView(context) {
-    return Expanded(
-      child: GridView.builder(
-          physics: BouncingScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 200,
-            childAspectRatio: 1 / 2,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: kPadding / 2,
-          ),
-          itemCount: 10,
-          itemBuilder: (BuildContext ctx, index) {
-            return InkWell(
-                onTap: () {
-                  FocusScope.of(context).unfocus();
-                  Get.toNamed(Routes.DETAIL);
+  _buildGridView(context) {
+    return FutureBuilder<List<MyBook>>(
+        future: controller.booksFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasData) {
+              return Expanded(
+                child: GridView.builder(
+                    physics: BouncingScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 200,
+                      childAspectRatio: 1 / 2.1,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: kPadding / 2,
+                    ),
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (BuildContext ctx, index) {
+                      return InkWell(
+                          onTap: () {
+                            FocusScope.of(context).unfocus();
+                            Get.toNamed(Routes.DETAIL, arguments: {
+                              'book': snapshot.data![index],
+                              // "name": snapshot.data![index].name,
+                              // "description": snapshot.data![index].description,
+                              // "image": snapshot.data![index].image,
+                              // "price": snapshot.data![index].price,
+                              // "authur": snapshot.data![index].authur,
+                            });
+                          },
+                          child: HomeViewBook(
+                            name: snapshot.data![index].name,
+                            descirption: snapshot.data![index].description,
+                            image: snapshot.data![index].image,
+                            price: snapshot.data![index].price,
+                            authur: snapshot.data![index].authur,
+                          ));
+                    }).paddingAll(kPadding / 2),
+              );
+            } else {
+              return Expanded(
+                  child: Center(
+                      child: ElevatedButton(
+                onPressed: () async {
+                  controller.fetchBooksFromFirebase();
+
+                  // final db = FirebaseFirestore.instance;
+                  // final result = await db
+                  //     .collection("books")
+                  //     .doc(FirebaseAuth.instance.currentUser!.uid)
+                  //     .update({
+                  //   "ALChemist": {
+                  //     "price": 950,
+                  //     "authur": "Arthur",
+                  //     "description": "This book tells you" * 10,
+                  //     "image":
+                  //         "https://images-na.ssl-images-amazon.com/images/I/51Zy9ZQZQlL._SX331_BO1,204,203,200_.jpg",
+                  //   }
+                  // }).then((value) => logger.i("Book Added Successfully"),
+                  //         onError: (error) =>
+                  //             logger.e("Error adding book: $error"));
                 },
-                child: HomeViewBook());
-          }).paddingAll(kPadding / 2),
-    );
+                child: Text(
+                  "No Books available",
+                ),
+              )));
+            }
+          }
+          return CircularProgressIndicator();
+        });
   }
 }

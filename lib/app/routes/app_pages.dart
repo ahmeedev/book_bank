@@ -7,6 +7,8 @@ import '../modules/detail/bindings/detail_binding.dart';
 import '../modules/detail/views/detail_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/mybooks/bindings/mybooks_binding.dart';
+import '../modules/mybooks/views/mybooks_view.dart';
 import '../modules/pdf/bindings/pdf_binding.dart';
 import '../modules/pdf/views/pdf_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
@@ -78,6 +80,11 @@ class AppPages {
       name: _Paths.PDF,
       page: () => const PdfView(),
       binding: PdfBinding(),
+    ),
+    GetPage(
+      name: _Paths.MYBOOKS,
+      page: () => const MybooksView(),
+      binding: MybooksBinding(),
     ),
   ];
 }

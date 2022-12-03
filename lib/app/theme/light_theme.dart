@@ -8,7 +8,7 @@ getLightTheme() {
       scaffoldBackgroundColor: defaultColorScheme.background,
       appBarTheme: const AppBarTheme(centerTitle: true),
       cardTheme: const CardTheme(
-        elevation: 12.0,
+        elevation: 8.0,
       ),
       iconTheme: const IconThemeData(
         size: 25.0,

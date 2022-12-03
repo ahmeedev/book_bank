@@ -1,15 +1,14 @@
 import 'package:book_bank/app/modules/home/controllers/settings_controller.dart';
 import 'package:book_bank/app/routes/app_pages.dart';
 import 'package:book_bank/app/theme/app_constants.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-import '../../../../../main.dart';
+import '../../../../utilities/get_methods.dart';
 
-class ProfileWidget extends StatelessWidget {
+class ProfileWidget extends GetView<SettingsController> {
   const ProfileWidget({Key? key}) : super(key: key);
 
   @override
@@ -25,12 +24,12 @@ class ProfileWidget extends StatelessWidget {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
-                "Javeria Afzal",
+                controller.userName.value,
                 style:
                     theme.textTheme.titleLarge!.copyWith(color: Colors.white),
               ),
               Text(
-                "javiriaafzaldeme@gmail.com",
+                controller.userEmail.value,
                 style:
                     theme.textTheme.labelMedium!.copyWith(color: Colors.white),
               ),
@@ -84,22 +83,9 @@ class SettingsTiles extends GetView<SettingsController> {
             child: ListView(
               physics: const BouncingScrollPhysics(),
               children: [
-                _buildTile(theme, name: "Your Books", icon: Icons.book,
+                _buildTile(theme, name: "My Books", icon: Icons.book,
                     onTap: () async {
-                  print(FirebaseAuth.instance.currentUser!.uid);
-                  final db = FirebaseFirestore.instance;
-                  await db.collection('books').add({"Key": 1234});
-                  final result = await db.collection("books").doc().set({
-                    "AlChemist": {
-                      "price": 950,
-                      "writer": "Arthur Morgan",
-                      "description": "This book tells you" * 10,
-                      "image":
-                          "https://images-na.ssl-images-amazon.com/images/I/51Zy9ZQZQlL._SX331_BO1,204,203,200_.jpg",
-                    }
-                  }).then((value) => logger.i("Book Added Successfully"),
-                      onError: (error) =>
-                          logger.e("Error adding book: $error"));
+                  Get.toNamed(Routes.MYBOOKS);
                 }),
                 _buildTile(theme,
                     name: "Your History", icon: Icons.history, onTap: () {}),
@@ -108,26 +94,14 @@ class SettingsTiles extends GetView<SettingsController> {
                         onTap: () {
                         // Get.toNamed(Routes.SIGNIN);
                         FirebaseAuth.instance.signOut();
+                        showSnackBar(
+                            title: "Auth",
+                            description: "Sign out Successfully");
                       })
                     : _buildTile(theme, name: "Sign in", icon: Icons.person,
                         onTap: () {
                         Get.toNamed(Routes.SIGNIN);
                       }),
-                ElevatedButton(
-                    onPressed: () async {
-                      // print(FirebaseAuth.instance.currentUser!.uid);
-                      final db = FirebaseFirestore.instance;
-                      final docRef =
-                          db.collection("book").doc("JadEPHcUjFogDbHeuBms");
-                      docRef.get().then(
-                        (DocumentSnapshot doc) {
-                          final data = doc.data();
-                          print(data);
-                        },
-                        onError: (e) => print("Error getting document: $e"),
-                      );
-                    },
-                    child: const Text("teting"))
               ],
             ),
           )),

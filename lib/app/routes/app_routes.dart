@@ -11,6 +11,7 @@ abstract class Routes {
   static const VIEW = _Paths.VIEW;
   static const DETAIL = _Paths.DETAIL;
   static const PDF = _Paths.PDF;
+  static const MYBOOKS = _Paths.MYBOOKS;
 }
 
 abstract class _Paths {
@@ -23,4 +24,5 @@ abstract class _Paths {
   static const VIEW = '/view';
   static const DETAIL = '/detail';
   static const PDF = '/pdf';
+  static const MYBOOKS = '/mybooks';
 }
