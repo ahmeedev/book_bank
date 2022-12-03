@@ -10,6 +10,9 @@ getLightTheme() {
       cardTheme: const CardTheme(
         elevation: 8.0,
       ),
+      radioTheme: RadioThemeData(
+        fillColor: MaterialStateProperty.all(defaultColorScheme.primary),
+      ),
       iconTheme: const IconThemeData(
         size: 25.0,
         color: Colors.white,
