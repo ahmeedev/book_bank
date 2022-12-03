@@ -22,6 +22,9 @@ class SettingsController extends GetxController {
         isSingIn.value = true;
         userName.value =
             FirebaseAuth.instance.currentUser!.displayName ?? 'User Name';
+        if (userName.value.isEmpty) {
+          userName.value = 'User Name';
+        }
         userEmail.value = FirebaseAuth.instance.currentUser!.email!;
         logger.e('User is signed in!');
       }
