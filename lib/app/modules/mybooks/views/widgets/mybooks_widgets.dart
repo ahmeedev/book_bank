@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../../../routes/app_pages.dart';
 import '../../../../theme/app_constants.dart';
+import '../../../home/models/book_model.dart';
 
 class MyBookCard extends StatelessWidget {
-  const MyBookCard({Key? key}) : super(key: key);
+  final MyBook book;
+
+  const MyBookCard({
+    Key? key,
+    required this.book,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +26,7 @@ class MyBookCard extends StatelessWidget {
           width: width * 0.5,
           child: FittedBox(
             fit: BoxFit.fill,
-            child: Image.network("https://picsum.photos/180"),
+            child: Image.network(book.image),
           ),
         ),
         kHeightH,
@@ -30,7 +37,7 @@ class MyBookCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Al Chemist",
+                  book.name,
                   style: theme.textTheme.titleMedium!
                       .copyWith(fontWeight: FontWeight.w900),
                 ),
@@ -38,12 +45,12 @@ class MyBookCard extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "By: William James",
+                      book.authur,
                       style: theme.textTheme.labelMedium!.copyWith(),
                     ).cornerRadius(kRadius / 2),
                     const Spacer(),
                     Text(
-                      "800 Rs.",
+                      "Rs. ${book.price}",
                       style: theme.textTheme.labelLarge!.copyWith(
                           fontWeight: FontWeight.w900,
                           color: theme.colorScheme.primary),
@@ -55,8 +62,7 @@ class MyBookCard extends StatelessWidget {
                 ),
                 kHeightH,
                 Text(
-                  "This book introduce you the story of a man who finds a gold from their he lives" *
-                      2,
+                  book.description,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                 ),
@@ -65,7 +71,10 @@ class MyBookCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     ElevatedButton(
-                        onPressed: () {}, child: const Text("Read Now")),
+                        onPressed: () {
+                          Get.toNamed(Routes.PDF);
+                        },
+                        child: const Text("Read Now")),
                   ],
                 )
               ],

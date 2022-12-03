@@ -1,21 +1,14 @@
+import 'package:book_bank/app/modules/home/models/book_model.dart';
 import 'package:book_bank/app/theme/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomeViewBook extends StatelessWidget {
-  final String name;
-  final String descirption;
-  final int price;
-  final String image;
-  final String authur;
+  final MyBook book;
   const HomeViewBook({
     Key? key,
-    required this.name,
-    required this.descirption,
-    required this.price,
-    required this.image,
-    required this.authur,
+    required this.book,
   }) : super(key: key);
 
   @override
@@ -30,7 +23,7 @@ class HomeViewBook extends StatelessWidget {
           width: width * 0.5,
           child: FittedBox(
             fit: BoxFit.fill,
-            child: Image.network(image),
+            child: Image.network(book.image),
           ),
         ),
         kHeightH,
@@ -41,7 +34,7 @@ class HomeViewBook extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  name,
+                  book.name,
                   style: theme.textTheme.titleMedium!
                       .copyWith(fontWeight: FontWeight.w900),
                 ),
@@ -49,12 +42,12 @@ class HomeViewBook extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "By: $authur",
+                      "By: ${book.authur}",
                       style: theme.textTheme.labelMedium!.copyWith(),
                     ).cornerRadius(kRadius / 2),
                     const Spacer(),
                     Text(
-                      "Rs. $price",
+                      "Rs. ${book.price}",
                       style: theme.textTheme.labelLarge!.copyWith(
                           fontWeight: FontWeight.w900,
                           color: theme.colorScheme.primary),
@@ -66,7 +59,7 @@ class HomeViewBook extends StatelessWidget {
                 ),
                 kHeightH,
                 Text(
-                  descirption,
+                  book.description,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                 ),

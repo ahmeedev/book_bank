@@ -203,11 +203,7 @@ class HomeView extends GetView<HomeController> {
                             });
                           },
                           child: HomeViewBook(
-                            name: snapshot.data![index].name,
-                            descirption: snapshot.data![index].description,
-                            image: snapshot.data![index].image,
-                            price: snapshot.data![index].price,
-                            authur: snapshot.data![index].authur,
+                            book: snapshot.data![index],
                           ));
                     }).paddingAll(kPadding / 2),
               );
@@ -240,7 +236,7 @@ class HomeView extends GetView<HomeController> {
               )));
             }
           }
-          return CircularProgressIndicator();
+          return Center(child: CircularProgressIndicator());
         });
   }
 }

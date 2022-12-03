@@ -32,8 +32,6 @@ class HomeController extends GetxController {
     for (var element in documents.docs) {
       final result = element.data();
       result.forEach((key, value) {
-        print(key);
-        print(value);
         final myBook = MyBook(
             name: key,
             authur: value['authur'],

@@ -5,8 +5,8 @@ import '../controllers/mybooks_controller.dart';
 class MybooksBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<MybooksController>(
-      () => MybooksController(),
+    Get.put<MybooksController>(
+      MybooksController(),
     );
   }
 }

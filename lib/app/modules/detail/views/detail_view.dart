@@ -1,4 +1,5 @@
 import 'package:book_bank/app/modules/cart/controllers/cart_controller.dart';
+import 'package:book_bank/app/utilities/get_methods.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -78,6 +79,10 @@ class DetailView extends GetView<DetailController> {
                           Get.find<CartController>()
                               .cartItems
                               .add(controller.book);
+
+                          showSnackBar(
+                              title: "Cart",
+                              description: "Items added to cart successfully");
                         },
                         child: const Text("Add to cart").paddingAll(kPadding))),
                 kWidth,
