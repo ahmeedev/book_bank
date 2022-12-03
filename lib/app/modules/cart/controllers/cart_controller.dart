@@ -3,18 +3,14 @@ import 'package:get/get.dart';
 
 class CartController extends GetxController {
   final cartItems = <MyBook>[].obs;
-  final totalPrice = 100.obs;
+  var totalPrice = 0;
 
-  @override
-  void onInit() {
-    calculateTotalPrices();
-    super.onInit();
-  }
-
-  calculateTotalPrices() {
-    totalPrice.value = 0;
+  Future calculateTotalPrices() {
+    totalPrice = 0;
     for (var element in cartItems) {
-      totalPrice.value += element.price;
+      totalPrice += element.price;
+      print(totalPrice);
     }
+    return Future.value(totalPrice);
   }
 }

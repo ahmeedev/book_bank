@@ -21,6 +21,7 @@ class CartView extends GetView<CartController> {
             : Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
                 Expanded(
                   child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
                     itemCount: controller.cartItems.length,
                     // padding: const EdgeInsets.symmetric(vertical: kPadding),
                     itemBuilder: (BuildContext context, int index) {
@@ -72,9 +73,25 @@ class CartView extends GetView<CartController> {
                                 color: defaultColorScheme.primary,
                                 fontWeight: FontWeight.w900)),
                         const Spacer(),
-                        Text("Rs. ${controller.totalPrice.value}",
-                            style: theme.textTheme.titleMedium!
-                                .copyWith(fontWeight: FontWeight.w900)),
+                        FutureBuilder(
+                            future: controller.calculateTotalPrices(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                if (snapshot.hasData) {
+                                  return Text("Rs. ${snapshot.data}",
+                                      style: theme.textTheme.titleMedium!
+                                          .copyWith(
+                                              fontWeight: FontWeight.w900));
+                                } else {
+                                  return Text("Rs. 0",
+                                      style: theme.textTheme.titleMedium!
+                                          .copyWith(
+                                              fontWeight: FontWeight.w900));
+                                }
+                              }
+                              return const CircularProgressIndicator();
+                            }),
                       ]).paddingSymmetric(horizontal: kPadding),
                       kHeight,
                       ElevatedButton(
