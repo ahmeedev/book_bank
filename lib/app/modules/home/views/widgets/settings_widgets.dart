@@ -88,7 +88,7 @@ class SettingsTiles extends GetView<SettingsController> {
                   Get.toNamed(Routes.MYBOOKS);
                 }),
                 _buildTile(theme,
-                    name: "Your History", icon: Icons.history, onTap: () {}),
+                    name: "Upload books", icon: Icons.history, onTap: () {}),
                 controller.isSingIn.value
                     ? _buildTile(theme, name: "Sign out", icon: Icons.person,
                         onTap: () {

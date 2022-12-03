@@ -149,11 +149,18 @@ class HomeView extends GetView<HomeController> {
           controller.bottomAppBarState['isHome']!
               ? TextField(
                   // obscureText: true,
-
+                  controller: controller.searchTextFieldController,
+                  onChanged: (value) => controller.searchBook(query: value),
                   decoration: InputDecoration(
-                    suffixIcon: Icon(
-                      Icons.clear_sharp,
-                      color: theme.colorScheme.onSurface,
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        controller.searchTextFieldController.clear();
+                        controller.searchBook(query: '');
+                      },
+                      icon: Icon(
+                        Icons.clear_sharp,
+                        color: theme.colorScheme.onSurface,
+                      ),
                     ),
                     filled: true,
                     border: OutlineInputBorder(),
@@ -173,39 +180,42 @@ class HomeView extends GetView<HomeController> {
   }
 
   _buildGridView(context) {
+    final theme = Theme.of(context);
     return FutureBuilder<List<MyBook>>(
-        future: controller.booksFuture,
+        future: controller.booksFuture.value,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
               return Expanded(
-                child: GridView.builder(
-                    physics: BouncingScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 200,
-                      childAspectRatio: 1 / 2.1,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: kPadding / 2,
-                    ),
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (BuildContext ctx, index) {
-                      return InkWell(
-                          onTap: () {
-                            FocusScope.of(context).unfocus();
-                            Get.toNamed(Routes.DETAIL, arguments: {
-                              'book': snapshot.data![index],
-                              // "name": snapshot.data![index].name,
-                              // "description": snapshot.data![index].description,
-                              // "image": snapshot.data![index].image,
-                              // "price": snapshot.data![index].price,
-                              // "authur": snapshot.data![index].authur,
-                            });
-                          },
-                          child: HomeViewBook(
-                            book: snapshot.data![index],
-                          ));
-                    }).paddingAll(kPadding / 2),
+                child: snapshot.data!.isEmpty
+                    ? Center(
+                        child: Text(
+                        "No Book Available with this name",
+                        style: theme.textTheme.labelLarge!
+                            .copyWith(fontWeight: FontWeight.w900),
+                      ))
+                    : GridView.builder(
+                        physics: BouncingScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 200,
+                          childAspectRatio: 1 / 2.1,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: kPadding / 2,
+                        ),
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (BuildContext ctx, index) {
+                          return InkWell(
+                              onTap: () {
+                                FocusScope.of(context).unfocus();
+                                Get.toNamed(Routes.DETAIL, arguments: {
+                                  'book': snapshot.data![index],
+                                });
+                              },
+                              child: HomeViewBook(
+                                book: snapshot.data![index],
+                              ));
+                        }).paddingAll(kPadding / 2),
               );
             } else {
               return Expanded(
@@ -232,6 +242,8 @@ class HomeView extends GetView<HomeController> {
                 },
                 child: Text(
                   "No Books available",
+                  style: theme.textTheme.labelLarge!
+                      .copyWith(fontWeight: FontWeight.w900),
                 ),
               )));
             }

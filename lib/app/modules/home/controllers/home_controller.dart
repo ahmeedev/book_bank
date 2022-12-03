@@ -1,11 +1,13 @@
 import 'package:book_bank/app/modules/home/models/book_model.dart';
-import 'package:book_bank/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   var appBartitles = ["Book Bank", "Settings"];
   var bottomAppBarState = {"isHome": true, "isSetting": false}.obs;
+
+  var searchTextFieldController = TextEditingController();
 
   void changeBottomAppBarState(String state) {
     bottomAppBarState.forEach((key, value) {
@@ -14,15 +16,19 @@ class HomeController extends GetxController {
     bottomAppBarState[state] = true;
   }
 
-  late final Future<List<MyBook>> booksFuture;
+  var booksFuture = Future<List<MyBook>>(() {
+    return [];
+  }).obs;
+
   @override
   void onInit() {
-    booksFuture = fetchBooksFromFirebase();
+    booksFuture.value = fetchBooksFromFirebase();
 
     super.onInit();
   }
 
   final books = <MyBook>[];
+
   Future<List<MyBook>> fetchBooksFromFirebase() async {
     // first get all the docuemtns from the firebase
     final documents =
@@ -43,8 +49,15 @@ class HomeController extends GetxController {
       // print(books);
     }
 
-    logger.e(books);
-
     return Future.value(books);
+  }
+
+  searchBook({required query}) {
+    final result = books
+        .where((element) =>
+            element.name.toLowerCase().contains(query.toString().toLowerCase()))
+        .toList();
+
+    booksFuture.value = Future.value(result);
   }
 }
