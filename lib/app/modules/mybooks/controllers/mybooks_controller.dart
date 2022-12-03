@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 class MybooksController extends GetxController {
   late Future myBooksFuture;
   final List<MyBook> myBooks = <MyBook>[];
+
   @override
   void onInit() {
     myBooksFuture = _getMyBooksFromFirebase();

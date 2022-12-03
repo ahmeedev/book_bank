@@ -72,7 +72,8 @@ class MyBookCard extends StatelessWidget {
                   children: [
                     ElevatedButton(
                         onPressed: () {
-                          Get.toNamed(Routes.PDF);
+                          Get.toNamed(Routes.PDF,
+                              arguments: {"isFullAccess": true});
                         },
                         child: const Text("Read Now")),
                   ],

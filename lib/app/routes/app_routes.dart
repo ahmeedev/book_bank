@@ -13,6 +13,7 @@ abstract class Routes {
   static const DETAIL = _Paths.DETAIL;
   static const PDF = _Paths.PDF;
   static const MYBOOKS = _Paths.MYBOOKS;
+  static const BUYBOOK = _Paths.BUYBOOK;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const DETAIL = '/detail';
   static const PDF = '/pdf';
   static const MYBOOKS = '/mybooks';
+  static const BUYBOOK = '/buybook';
 }

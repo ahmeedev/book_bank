@@ -1,3 +1,4 @@
+import 'package:book_bank/app/routes/app_pages.dart';
 import 'package:book_bank/app/theme/app_constants.dart';
 import 'package:book_bank/app/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -95,9 +96,12 @@ class CartView extends GetView<CartController> {
                       ]).paddingSymmetric(horizontal: kPadding),
                       kHeight,
                       ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.toNamed(Routes.BUYBOOK,
+                                arguments: {"books": controller.cartItems});
+                          },
                           child:
-                              const Text("Shop All").paddingAll(kPadding + 4)),
+                              const Text("Buy All").paddingAll(kPadding + 4)),
                     ],
                   ),
                 )

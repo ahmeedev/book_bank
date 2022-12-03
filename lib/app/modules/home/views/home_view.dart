@@ -28,7 +28,11 @@ class HomeView extends GetView<HomeController> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _buildAppBar(context),
+                        WidgetSize(
+                            onChange: (Size size) {
+                              controller.bottomAppBarHeight.value = size.height;
+                            },
+                            child: _buildAppBar(context)),
                         controller.bottomAppBarState['isHome']!
                             ? _buildGridView(context)
                             : SettingsTiles()
@@ -194,28 +198,32 @@ class HomeView extends GetView<HomeController> {
                         style: theme.textTheme.labelLarge!
                             .copyWith(fontWeight: FontWeight.w900),
                       ))
-                    : GridView.builder(
-                        physics: BouncingScrollPhysics(),
-                        gridDelegate:
-                            const SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 200,
-                          childAspectRatio: 1 / 2.1,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: kPadding / 2,
-                        ),
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (BuildContext ctx, index) {
-                          return InkWell(
-                              onTap: () {
-                                FocusScope.of(context).unfocus();
-                                Get.toNamed(Routes.DETAIL, arguments: {
-                                  'book': snapshot.data![index],
-                                });
-                              },
-                              child: HomeViewBook(
-                                book: snapshot.data![index],
-                              ));
-                        }).paddingAll(kPadding / 2),
+                    : Container(
+                        padding: EdgeInsets.only(
+                            bottom: controller.bottomAppBarHeight.value / 2),
+                        child: GridView.builder(
+                            physics: BouncingScrollPhysics(),
+                            gridDelegate:
+                                const SliverGridDelegateWithMaxCrossAxisExtent(
+                              maxCrossAxisExtent: 200,
+                              childAspectRatio: 1 / 2.1,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: kPadding / 2,
+                            ),
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (BuildContext ctx, index) {
+                              return InkWell(
+                                  onTap: () {
+                                    FocusScope.of(context).unfocus();
+                                    Get.toNamed(Routes.DETAIL, arguments: {
+                                      'book': snapshot.data![index],
+                                    });
+                                  },
+                                  child: HomeViewBook(
+                                    book: snapshot.data![index],
+                                  ));
+                            }).paddingSymmetric(horizontal: kPadding / 2),
+                      ),
               );
             } else {
               return Expanded(

@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/buybook/bindings/buybook_binding.dart';
+import '../modules/buybook/views/buybook_view.dart';
 import '../modules/cart/bindings/cart_binding.dart';
 import '../modules/cart/views/cart_view.dart';
 import '../modules/detail/bindings/detail_binding.dart';
@@ -59,6 +61,11 @@ class AppPages {
       name: _Paths.MYBOOKS,
       page: () => const MybooksView(),
       binding: MybooksBinding(),
+    ),
+    GetPage(
+      name: _Paths.BUYBOOK,
+      page: () => const BuybookView(),
+      binding: BuybookBinding(),
     ),
   ];
 }

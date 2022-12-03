@@ -72,10 +72,12 @@ class _PdfViewState extends State<PdfView> {
               controller: pdfViewerController,
               key: _pdfViewerStateKey,
               onPageChanged: (details) {
-                if (details.newPageNumber > 10) {
-                  Get.find<PdfController>().showOverlay.value = true;
-                } else {
-                  Get.find<PdfController>().showOverlay.value = false;
+                if (Get.find<PdfController>().isFullAccess == false) {
+                  if (details.newPageNumber > 10) {
+                    Get.find<PdfController>().showOverlay.value = true;
+                  } else {
+                    Get.find<PdfController>().showOverlay.value = false;
+                  }
                 }
               },
             ),

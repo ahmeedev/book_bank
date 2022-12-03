@@ -88,7 +88,11 @@ class DetailView extends GetView<DetailController> {
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: theme.colorScheme.secondary),
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.toNamed(Routes.BUYBOOK, arguments: {
+                          "books": [controller.book]
+                        });
+                      },
                       child: const Text("Buy Now").paddingAll(kPadding))),
             ],
           ).paddingSymmetric(vertical: kPadding / 2, horizontal: kPadding),

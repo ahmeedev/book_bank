@@ -1,8 +1,11 @@
 import 'package:book_bank/app/modules/home/models/book_model.dart';
 import 'package:book_bank/app/theme/app_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../../../../routes/app_pages.dart';
 
 class HomeViewBook extends StatelessWidget {
   final MyBook book;
@@ -68,7 +71,12 @@ class HomeViewBook extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     ElevatedButton(
-                        onPressed: () {}, child: const Text("Shop Now")),
+                        onPressed: () {
+                          Get.toNamed(Routes.BUYBOOK, arguments: {
+                            "books": [book]
+                          });
+                        },
+                        child: const Text("Buy Now")),
                   ],
                 )
               ],
@@ -77,5 +85,44 @@ class HomeViewBook extends StatelessWidget {
         ),
       ]),
     );
+  }
+}
+
+class WidgetSize extends StatefulWidget {
+  final Widget child;
+  final Function onChange;
+
+  const WidgetSize({
+    Key? key,
+    required this.onChange,
+    required this.child,
+  }) : super(key: key);
+
+  @override
+  _WidgetSizeState createState() => _WidgetSizeState();
+}
+
+class _WidgetSizeState extends State<WidgetSize> {
+  @override
+  Widget build(BuildContext context) {
+    SchedulerBinding.instance.addPostFrameCallback(postFrameCallback);
+    return Container(
+      key: widgetKey,
+      child: widget.child,
+    );
+  }
+
+  var widgetKey = GlobalKey();
+  var oldSize;
+
+  void postFrameCallback(_) {
+    var context = widgetKey.currentContext;
+    if (context == null) return;
+
+    var newSize = context.size;
+    if (oldSize == newSize) return;
+
+    oldSize = newSize;
+    widget.onChange(newSize);
   }
 }

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 class HomeController extends GetxController {
   var appBartitles = ["Book Bank", "Settings"];
   var bottomAppBarState = {"isHome": true, "isSetting": false}.obs;
+  var bottomAppBarHeight = 0.0.obs;
 
   var searchTextFieldController = TextEditingController();
 
