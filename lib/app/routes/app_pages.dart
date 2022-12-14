@@ -16,6 +16,8 @@ import '../modules/signin/bindings/signin_binding.dart';
 import '../modules/signin/views/signin_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
+import '../modules/uploadBook/bindings/upload_book_binding.dart';
+import '../modules/uploadBook/views/upload_book_view.dart';
 
 // ignore_for_file: prefer_const_constructors
 
@@ -66,6 +68,11 @@ class AppPages {
       name: _Paths.BUYBOOK,
       page: () => const BuybookView(),
       binding: BuybookBinding(),
+    ),
+    GetPage(
+      name: _Paths.UPLOAD_BOOK,
+      page: () => const UploadBookView(),
+      binding: UploadBookBinding(),
     ),
   ];
 }
