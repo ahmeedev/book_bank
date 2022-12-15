@@ -31,6 +31,7 @@ class HomeController extends GetxController {
   final books = <MyBook>[];
 
   Future<List<MyBook>> fetchBooksFromFirebase() async {
+    books.clear();
     // first get all the docuemtns from the firebase
     final documents =
         await FirebaseFirestore.instance.collection('books').get();

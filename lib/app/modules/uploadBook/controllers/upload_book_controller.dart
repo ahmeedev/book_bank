@@ -91,7 +91,7 @@ class UploadBookController extends GetxController {
       }, SetOptions(merge: true));
 
       await db
-          .collection("myBooks")
+          .collection("books")
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .set({
         "$random": {
@@ -105,6 +105,8 @@ class UploadBookController extends GetxController {
       }, SetOptions(merge: true));
 
       logger.d("Book uploaded successfully");
+      showSnackBar(
+          title: "Upload!", description: "Your book is uploaded successfully!");
     } else {
       showSnackBar(
           title: "Error!", description: "Fill and select all the fields first");

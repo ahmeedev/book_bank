@@ -79,7 +79,10 @@ class DetailView extends GetView<DetailController> {
                   // flex: 2,
                   child: ElevatedButton(
                       onPressed: () {
-                        Get.toNamed(Routes.PDF);
+                        Get.toNamed(Routes.PDF, arguments: {
+                          "isFullAccess": controller.book.isFullAccess,
+                          "pdfUrl": controller.book.pdfUrl,
+                        });
                       },
                       child: const Text("Read").paddingAll(kPadding))),
               kWidth,
