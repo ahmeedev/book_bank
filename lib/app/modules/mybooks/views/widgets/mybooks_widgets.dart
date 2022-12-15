@@ -26,7 +26,7 @@ class MyBookCard extends StatelessWidget {
           width: width * 0.5,
           child: FittedBox(
             fit: BoxFit.fill,
-            child: Image.network(book.image),
+            child: Image.network(book.imageUrl),
           ),
         ),
         kHeightH,
@@ -72,8 +72,10 @@ class MyBookCard extends StatelessWidget {
                   children: [
                     ElevatedButton(
                         onPressed: () {
-                          Get.toNamed(Routes.PDF,
-                              arguments: {"isFullAccess": true});
+                          Get.toNamed(Routes.PDF, arguments: {
+                            "isFullAccess": book.isFullAccess,
+                            "pdfUrl": book.pdfUrl
+                          });
                         },
                         child: const Text("Read Now")),
                   ],

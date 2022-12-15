@@ -38,7 +38,7 @@ class CartView extends GetView<CartController> {
                         child: Card(
                           child: ListTile(
                             leading: Image.network(
-                              controller.cartItems[index].image,
+                              controller.cartItems[index].imageUrl,
                             ).paddingAll(4),
                             title: Text(
                               controller.cartItems[index].name,

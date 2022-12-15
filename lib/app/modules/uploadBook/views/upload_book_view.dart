@@ -62,6 +62,20 @@ class UploadBookView extends GetView<UploadBookController> {
                 ),
               ),
               kHeight,
+              TextFormField(
+                // validator: (value) => EmailValidator.validate(value!)
+                //     ? null
+                //     : "Please enter a valid email",
+                maxLines: 1,
+                // controller: controller.emailController,
+                decoration: InputDecoration(
+                  hintText: 'Enter book Author',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              kHeight,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -96,7 +110,9 @@ class UploadBookView extends GetView<UploadBookController> {
               kHeight,
               kHeight,
               ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.uploadBook();
+                  },
                   child: const Text("  Upload Book  ").paddingAll(kPadding)),
             ],
           ),

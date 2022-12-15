@@ -68,7 +68,7 @@ class _PdfViewState extends State<PdfView> {
         body: Stack(
           children: [
             SfPdfViewer.network(
-              'http://s3.amazonaws.com/dynamiccatholic.com/Best+Lent+Ever+2016/BLE+2017/Parish+Resources/RH_StudyGuide_V2.pdf',
+              Get.find<PdfController>().pdfUrl,
               controller: pdfViewerController,
               key: _pdfViewerStateKey,
               onPageChanged: (details) {

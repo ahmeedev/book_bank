@@ -31,7 +31,7 @@ class BuybookView extends GetView<BuybookController> {
                       SizedBox(
                         height: Get.height * 0.2,
                         child: Image.network(
-                          controller.buyingItems[index].image,
+                          controller.buyingItems[index].imageUrl,
                         ).paddingAll(4),
                       ),
                       Flexible(

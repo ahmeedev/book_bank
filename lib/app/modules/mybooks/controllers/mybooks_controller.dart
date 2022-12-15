@@ -17,7 +17,7 @@ class MybooksController extends GetxController {
     final db = FirebaseFirestore.instance;
 
     final docRef =
-        db.collection("books").doc(FirebaseAuth.instance.currentUser!.uid);
+        db.collection("myBooks").doc(FirebaseAuth.instance.currentUser!.uid);
     final data = await docRef.get();
     data.data()!.forEach((key, value) {
       print(key);
@@ -26,8 +26,10 @@ class MybooksController extends GetxController {
         name: key,
         authur: value['authur'],
         description: value['description'],
-        image: value['image'],
+        imageUrl: value['imageUrl'],
+        pdfUrl: value['pdfUrl'],
         price: value['price'],
+        isFullAccess: value['isFullAccess'],
       );
       myBooks.add(book);
       print(myBooks);

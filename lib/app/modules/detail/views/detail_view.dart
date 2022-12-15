@@ -27,7 +27,7 @@ class DetailView extends GetView<DetailController> {
               // borderRadius: BorderRadius.circular(20),
               image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage(controller.book.image)),
+                  image: NetworkImage(controller.book.imageUrl)),
             ),
           ),
           Expanded(

@@ -40,11 +40,14 @@ class HomeController extends GetxController {
       final result = element.data();
       result.forEach((key, value) {
         final myBook = MyBook(
-            name: key,
-            authur: value['authur'],
-            description: value['description'],
-            image: value['image'],
-            price: value['price']);
+          name: key,
+          authur: value['authur'],
+          description: value['description'],
+          imageUrl: value['imageUrl'],
+          pdfUrl: value['pdfUrl'],
+          price: value['price'],
+          isFullAccess: value['isFullAccess'],
+        );
         books.add(myBook);
       });
       // print(books);

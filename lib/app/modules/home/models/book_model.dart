@@ -1,13 +1,18 @@
 class MyBook {
   String name;
   String description;
-  String image;
+  String imageUrl;
+  String pdfUrl;
   int price;
   String authur;
-  MyBook(
-      {required this.name,
-      required this.authur,
-      required this.description,
-      required this.image,
-      required this.price});
+  bool isFullAccess;
+  MyBook({
+    required this.name,
+    required this.authur,
+    required this.description,
+    required this.imageUrl,
+    required this.pdfUrl,
+    required this.price,
+    required this.isFullAccess,
+  });
 }

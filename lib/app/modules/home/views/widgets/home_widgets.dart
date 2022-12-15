@@ -26,7 +26,7 @@ class HomeViewBook extends StatelessWidget {
           width: width * 0.5,
           child: FittedBox(
             fit: BoxFit.fill,
-            child: Image.network(book.image),
+            child: Image.network(book.imageUrl),
           ),
         ),
         kHeightH,

@@ -4,4 +4,5 @@ class PdfController extends GetxController {
   var showOverlay = false.obs;
 
   final isFullAccess = Get.arguments["isFullAccess"] ?? false;
+  final pdfUrl = Get.arguments["pdfUrl"] ?? "";
 }
