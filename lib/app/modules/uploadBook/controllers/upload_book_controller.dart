@@ -86,7 +86,7 @@ class UploadBookController extends GetxController {
           "imageUrl": imageUrl,
           "pdfUrl": pdfUrl,
           "price": 800,
-          "isFullAccess": true,
+          "isFullAccess": true, // fix
         },
       }, SetOptions(merge: true));
 
@@ -95,12 +95,13 @@ class UploadBookController extends GetxController {
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .set({
         "$random": {
+          // title is random variable
           "authur": "authur",
           "description": "description",
           "imageUrl": imageUrl,
           "pdfUrl": pdfUrl,
           "price": 800,
-          "isFullAccess": false,
+          "isFullAccess": false, // fix
         },
       }, SetOptions(merge: true));
 

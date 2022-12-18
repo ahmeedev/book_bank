@@ -78,9 +78,25 @@ class SigninView extends GetView<SigninController> {
                         value: controller.rememberValue.value,
                         activeColor: Theme.of(context).colorScheme.primary,
                         onChanged: (newValue) {
-                          // setState(() {
-                          //   rememberValue = newValue!;
-                          // });
+                          Get.defaultDialog(
+                            title: "Recaptcha",
+                            middleText:
+                                "Click on the checkbox to verify that you are not a robot",
+                            confirm: ElevatedButton(
+                                onPressed: () {
+                                  if (controller.rememberValue.value == false) {
+                                    controller.rememberValue.value = true;
+                                  }
+                                  Get.back();
+                                },
+                                child: const Text("Confirm")),
+                            cancel: ElevatedButton(
+                                onPressed: () {
+                                  controller.rememberValue.value = false;
+                                  Get.back();
+                                },
+                                child: const Text("Cancel")),
+                          );
                         },
                         controlAffinity: ListTileControlAffinity.leading,
                       )),

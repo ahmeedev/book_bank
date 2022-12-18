@@ -11,11 +11,16 @@ class SigninController extends GetxController {
   final formKey = GlobalKey<FormState>();
   var rememberValue = false.obs;
   void login(String email, String password) async {
-    final result = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: "jia@gmail.com", password: "jia123");
-    log("Result is $result", name: "SIGNIN");
-    Get.back();
-    showSnackBar(title: "Auth", description: "Sign in Successfully");
+    if (rememberValue.value) {
+      final result = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: "jia@gmail.com", password: "jia123");
+      log("Result is $result", name: "SIGNIN");
+      Get.back();
+      showSnackBar(title: "Auth", description: "Sign in Successfully");
+    } else {
+      showSnackBar(
+          title: "Error!", description: 'Click on recaptha button to continue');
+    }
     //   try {
     //     if (email.isNotEmpty && password.isNotEmpty) {
     //       await FirebaseAuth.instance
