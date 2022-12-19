@@ -1,16 +1,22 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:book_bank/app/modules/uploadBook/Models/up_book_model.dart';
 import 'package:book_bank/app/utilities/get_methods.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../main.dart';
 
 class UploadBookController extends GetxController {
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController priceController = TextEditingController();
+  final TextEditingController descController = TextEditingController();
+  final TextEditingController authurController = TextEditingController();
   var isImageSelected = false.obs;
   var isPdfSelected = false.obs;
 
@@ -45,11 +51,17 @@ class UploadBookController extends GetxController {
     }
   }
 
-  uploadBook() async {
+  void uploadBook(
+      String bookName, String authur, int price, String description) async {
     late String imageUrl;
     late String pdfUrl;
 
-    if (pdfFile != null && imageFile != null) {
+    if (bookName.isNotEmpty &&
+        pdfFile != null &&
+        imageFile != null &&
+        authur.isNotEmpty &&
+        price != 0 &&
+        description.isNotEmpty) {
       //* Upload image
       final storageRef = FirebaseStorage.instance.ref();
       int random = Random().nextInt(100000);
@@ -73,6 +85,12 @@ class UploadBookController extends GetxController {
         logger.e(e.message);
       }
 
+      UploadModel model = UploadModel(
+        bookName: bookName,
+        authur: authur,
+        description: description,
+        price: price,
+      );
       final db = FirebaseFirestore.instance;
 
       // //! put the text fields data accrodingly..
@@ -80,12 +98,12 @@ class UploadBookController extends GetxController {
           .collection("myBooks")
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .set({
-        "$random": {
-          "authur": "authur",
-          "description": "description",
+        model.bookName: {
+          "authur": model.authur,
+          "description": model.description,
           "imageUrl": imageUrl,
           "pdfUrl": pdfUrl,
-          "price": 800,
+          "price": model.price,
           "isFullAccess": true, // fix
         },
       }, SetOptions(merge: true));
@@ -94,13 +112,13 @@ class UploadBookController extends GetxController {
           .collection("books")
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .set({
-        "$random": {
+        model.bookName: {
           // title is random variable
-          "authur": "authur",
-          "description": "description",
+          "authur": model.authur,
+          "description": model.authur,
           "imageUrl": imageUrl,
           "pdfUrl": pdfUrl,
-          "price": 800,
+          "price": model.price,
           "isFullAccess": false, // fix
         },
       }, SetOptions(merge: true));

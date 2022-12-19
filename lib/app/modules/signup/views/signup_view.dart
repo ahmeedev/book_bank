@@ -140,13 +140,13 @@ class SignupView extends GetView<SignupController> {
                             controller.emailController.text,
                             controller.passwordController.text,
                           );
-                          // if (controller.formKey.currentState!.validate()) {
-                          //   controller.SignUp(
-                          //     controller.firstnameController.text,
-                          //     controller.emailController.text,
-                          //     controller.passwordController.text,
-                          //   );
-                          // }
+                          if (controller.formKey.currentState!.validate()) {
+                            controller.SignUp(
+                              controller.firstnameController.text,
+                              controller.emailController.text,
+                              controller.passwordController.text,
+                            );
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),

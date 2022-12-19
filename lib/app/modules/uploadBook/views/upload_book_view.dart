@@ -31,7 +31,7 @@ class UploadBookView extends GetView<UploadBookController> {
                   //     ? null
                   //     : "Please enter a valid email",
                   maxLines: 1,
-                  // controller: controller.emailController,
+                  controller: controller.titleController,
                   decoration: InputDecoration(
                     hintText: 'Enter book title',
                     border: OutlineInputBorder(
@@ -45,7 +45,7 @@ class UploadBookView extends GetView<UploadBookController> {
                   //     ? null
                   //     : "Please enter a valid email",
                   maxLines: 1,
-                  // controller: controller.emailController,
+                  controller: controller.priceController,
                   decoration: InputDecoration(
                     hintText: 'Enter book Price',
                     border: OutlineInputBorder(
@@ -59,7 +59,7 @@ class UploadBookView extends GetView<UploadBookController> {
                   //     ? null
                   //     : "Please enter a valid email",
                   maxLines: 8,
-                  // controller: controller.emailController,
+                  controller: controller.descController,
 
                   decoration: InputDecoration(
                     hintText: 'Enter book Description',
@@ -74,7 +74,7 @@ class UploadBookView extends GetView<UploadBookController> {
                   //     ? null
                   //     : "Please enter a valid email",
                   maxLines: 1,
-                  // controller: controller.emailController,
+                  controller: controller.authurController,
                   decoration: InputDecoration(
                     hintText: 'Enter book Author',
                     border: OutlineInputBorder(
@@ -118,7 +118,12 @@ class UploadBookView extends GetView<UploadBookController> {
                 kHeight,
                 ElevatedButton(
                     onPressed: () {
-                      controller.uploadBook();
+                      controller.uploadBook(
+                        controller.titleController.text,
+                        controller.authurController.text,
+                        int.parse(controller.priceController.text),
+                        controller.descController.text,
+                      );
                     },
                     child: const Text("  Upload Book  ").paddingAll(kPadding)),
               ],
