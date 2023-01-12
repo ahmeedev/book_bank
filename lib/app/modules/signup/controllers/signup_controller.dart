@@ -16,7 +16,7 @@ class SignupController extends GetxController {
 
   final radioButtonGroup = "seller".obs;
 
-  void SignUp(
+  void signUp(
     String username,
     String email,
     String password,
@@ -30,9 +30,16 @@ class SignupController extends GetxController {
     UserCredential credential = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
 
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .set({"isSeller": true});
+    if (radioButtonGroup == 'seller') {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .set({"isSeller": true});
+    } else {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .set({"isSeller": false});
+    }
   }
 }

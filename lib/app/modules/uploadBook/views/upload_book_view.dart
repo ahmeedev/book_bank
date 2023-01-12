@@ -116,6 +116,11 @@ class UploadBookView extends GetView<UploadBookController> {
                 ),
                 kHeight,
                 kHeight,
+                Obx(() => controller.isLoading.value
+                    ? const CircularProgressIndicator()
+                    : const SizedBox()),
+                kHeight,
+                kHeight,
                 ElevatedButton(
                     onPressed: () {
                       controller.uploadBook(

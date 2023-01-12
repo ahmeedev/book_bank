@@ -14,7 +14,8 @@ import '../../../../main.dart';
 
 class UploadBookController extends GetxController {
   final TextEditingController titleController = TextEditingController();
-  final TextEditingController priceController = TextEditingController();
+  final TextEditingController priceController =
+      TextEditingController(text: "0");
   final TextEditingController descController = TextEditingController();
   final TextEditingController authurController = TextEditingController();
   var isImageSelected = false.obs;
@@ -24,7 +25,7 @@ class UploadBookController extends GetxController {
   selectImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['png'],
+      allowedExtensions: ['png', 'jpg', 'jpeg'],
     );
 
     if (result != null) {
@@ -51,6 +52,7 @@ class UploadBookController extends GetxController {
     }
   }
 
+  final isLoading = false.obs;
   void uploadBook(
       String bookName, String authur, int price, String description) async {
     late String imageUrl;
@@ -62,6 +64,7 @@ class UploadBookController extends GetxController {
         authur.isNotEmpty &&
         price != 0 &&
         description.isNotEmpty) {
+      isLoading.value = true;
       //* Upload image
       final storageRef = FirebaseStorage.instance.ref();
       int random = Random().nextInt(100000);
@@ -126,6 +129,7 @@ class UploadBookController extends GetxController {
       logger.d("Book uploaded successfully");
       showSnackBar(
           title: "Upload!", description: "Your book is uploaded successfully!");
+      isLoading.value = false;
     } else {
       showSnackBar(
           title: "Error!", description: "Fill and select all the fields first");

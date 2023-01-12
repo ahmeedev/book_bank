@@ -70,7 +70,7 @@ class BuybookController extends GetxController {
               "imageUrl": element.imageUrl,
               "pdfUrl": element.pdfUrl,
               "price": element.price,
-              "isFullAccess": element.isFullAccess, // fix
+              "isFullAccess": true, // fix
             },
           }, SetOptions(merge: true));
         }

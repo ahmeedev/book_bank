@@ -87,10 +87,12 @@ class SettingsTiles extends GetView<SettingsController> {
                     onTap: () async {
                   Get.toNamed(Routes.MYBOOKS);
                 }),
-                _buildTile(theme, name: "Upload books", icon: Icons.history,
-                    onTap: () {
-                  Get.toNamed(Routes.UPLOAD_BOOK);
-                }),
+                controller.isSeller.value
+                    ? _buildTile(theme,
+                        name: "Upload books", icon: Icons.history, onTap: () {
+                        Get.toNamed(Routes.UPLOAD_BOOK);
+                      })
+                    : const SizedBox(),
                 controller.isSingIn.value
                     ? _buildTile(theme, name: "Sign out", icon: Icons.person,
                         onTap: () {
