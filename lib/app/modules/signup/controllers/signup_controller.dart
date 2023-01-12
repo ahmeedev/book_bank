@@ -1,3 +1,4 @@
+import 'package:book_bank/app/modules/signup/model/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +21,14 @@ class SignupController extends GetxController {
     String email,
     String password,
   ) async {
+    myUser user = myUser(
+      name: username,
+      email: email,
+      password: password,
+    );
+
     UserCredential credential = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(
-            email: "jia@gmail.com", password: "jia123");
+        .createUserWithEmailAndPassword(email: email, password: password);
 
     await FirebaseFirestore.instance
         .collection('users')

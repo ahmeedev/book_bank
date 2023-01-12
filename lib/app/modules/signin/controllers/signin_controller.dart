@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:book_bank/app/modules/signin/Models/signin_model.dart';
 import 'package:book_bank/app/utilities/get_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,8 +13,9 @@ class SigninController extends GetxController {
   var rememberValue = false.obs;
   void login(String email, String password) async {
     if (rememberValue.value) {
+      SignModel controller = SignModel(email: email, password: password);
       final result = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: "jia@gmail.com", password: "jia123");
+          email: controller.email, password: controller.password);
       log("Result is $result", name: "SIGNIN");
       Get.back();
       showSnackBar(title: "Auth", description: "Sign in Successfully");

@@ -107,10 +107,10 @@ class SigninView extends GetView<SigninController> {
                     onPressed: () {
                       controller.login(controller.emailController.text,
                           controller.passwordController.text);
-                      // if (controller.formKey.currentState!.validate()) {
-                      //   controller.login(controller.emailController.text,
-                      //       controller.passwordController.text);
-                      // }
+                      if (controller.formKey.currentState!.validate()) {
+                        controller.login(controller.emailController.text,
+                            controller.passwordController.text);
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.fromLTRB(40, 15, 40, 15),
