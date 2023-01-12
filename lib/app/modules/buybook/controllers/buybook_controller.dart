@@ -1,5 +1,6 @@
 import 'package:book_bank/app/modules/home/models/book_model.dart';
 import 'package:book_bank/app/utilities/get_methods.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -19,10 +20,12 @@ class BuybookController extends GetxController {
     return Future.value(totalPrice);
   }
 
-  final isPaymentDone = false.obs;
+  final isLoading = false.obs;
   Future<void> buyAll() async {
     final isAuthenticated = FirebaseAuth.instance.currentUser;
     if (isAuthenticated != null) {
+      isLoading.value = true;
+      // isPaymentComplete.value = false;
       final result = await http.post(
           Uri.parse(
               'https://sandbox.jazzcash.com.pk/ApplicationAPI/API/Payment/DoTransaction'),
@@ -54,7 +57,24 @@ class BuybookController extends GetxController {
       final response = result.body;
       if (result.statusCode == 200) {
         logger.i(response);
-        isPaymentDone.value = true;
+        isLoading.value = false;
+        final db = FirebaseFirestore.instance;
+        for (var element in buyingItems) {
+          await db
+              .collection("myBooks")
+              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .set({
+            "${element.name}1": {
+              "authur": element.authur,
+              "description": element.description,
+              "imageUrl": element.imageUrl,
+              "pdfUrl": element.pdfUrl,
+              "price": element.price,
+              "isFullAccess": element.isFullAccess, // fix
+            },
+          }, SetOptions(merge: true));
+        }
+
         showSnackBar(
             title: "Success", description: "Your payment is done successfully");
       }
