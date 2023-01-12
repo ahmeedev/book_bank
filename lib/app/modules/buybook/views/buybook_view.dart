@@ -131,8 +131,15 @@ class BuybookView extends GetView<BuybookController> {
                       }),
                 ]).paddingSymmetric(horizontal: kPadding),
                 kHeight,
+                Obx(() => controller.isLoading.value
+                    ? CircularProgressIndicator(
+                        color: defaultColorScheme.primary,
+                      )
+                    : const SizedBox()),
                 ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.buyAll();
+                    },
                     child: const Text("Buy All").paddingAll(kPadding + 4)),
               ],
             ),
