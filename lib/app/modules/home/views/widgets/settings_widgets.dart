@@ -97,6 +97,7 @@ class SettingsTiles extends GetView<SettingsController> {
                     ? _buildTile(theme, name: "Sign out", icon: Icons.person,
                         onTap: () {
                         // Get.toNamed(Routes.SIGNIN);
+                        controller.isSingIn.value = false;
                         FirebaseAuth.instance.signOut();
                         showSnackBar(
                             title: "Auth",
