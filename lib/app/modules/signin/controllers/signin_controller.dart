@@ -22,10 +22,12 @@ class SigninController extends GetxController {
           email: controller.email, password: controller.password);
       log("Result is $result", name: "SIGNIN");
       Get.back();
+
       final re = await FirebaseFirestore.instance
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .get();
+
       Get.find<SettingsController>().isSeller.value = re['isSeller'] ?? false;
       Get.back();
       showSnackBar(title: "Auth", description: "Sign in Successfully");

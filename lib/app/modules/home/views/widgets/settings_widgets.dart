@@ -41,7 +41,7 @@ class ProfileWidget extends GetView<SettingsController> {
                       color: theme.colorScheme.surface,
                       padding: const EdgeInsets.all(kPadding),
                       child: Icon(
-                        Icons.facebook,
+                        Icons.abc,
                         color: theme.colorScheme.onSurface,
                       )).cornerRadius(kRadius),
                   kWidth,
@@ -87,6 +87,12 @@ class SettingsTiles extends GetView<SettingsController> {
                     onTap: () async {
                   Get.toNamed(Routes.MYBOOKS);
                 }),
+                controller.isSeller.value
+                    ? _buildTile(theme,
+                        name: "Upload books", icon: Icons.history, onTap: () {
+                        Get.toNamed(Routes.UPLOAD_BOOK);
+                      })
+                    : const SizedBox(),
                 controller.isSeller.value
                     ? _buildTile(theme,
                         name: "Upload books", icon: Icons.history, onTap: () {
