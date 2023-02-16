@@ -149,6 +149,7 @@ class SignupView extends GetView<SignupController> {
                                 controller.emailController.text,
                                 controller.passwordController.text,
                               );
+                              Get.offAndToNamed(Routes.HOME);
                             }
                           },
                           style: ElevatedButton.styleFrom(
