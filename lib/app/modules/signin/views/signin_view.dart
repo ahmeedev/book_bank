@@ -108,6 +108,7 @@ class SigninView extends GetView<SigninController> {
                     onPressed: () {
                       controller.login(controller.emailController.text,
                           controller.passwordController.text);
+
                       if (controller.formKey.currentState!.validate()) {
                         controller.login(controller.emailController.text,
                             controller.passwordController.text);
